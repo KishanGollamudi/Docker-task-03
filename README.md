@@ -18,20 +18,19 @@ graph TD
 
 ## 🏗️ Detailed Pipeline Flow Diagram
 
-```mermaid
 graph LR
     A[Push to Main Branch] --> B[GitHub Actions Triggered]
     B --> C[Checkout Code]
-    C --> D[Node.js & Dependencies Installed]
+    C --> D[Node.js Install & NPM Install]
     D --> E[SonarQube Scan]
     E --> F[Create TAR Artifact]
-    F --> G[Nexus RAW Upload]
+    F --> G[Nexus Upload RAW Repository]
     G --> H[Docker Build]
-    H --> I[Push to DockerHub]
+    H --> I[DockerHub Push]
     I --> J[Manual Deployment on EC2]
     J --> K[Run Container on Port 5006]
     K --> L[Application Live]
-```
+
 
 ---
 
