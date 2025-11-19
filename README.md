@@ -1,181 +1,81 @@
-# Complete CI/CD Pipeline Documentation
+# 🚀 Complete CI/CD Pipeline Documentation (Node.js + GitHub Actions + SonarQube + Nexus + Docker + EC2)
+
+This README provides the **complete CI/CD workflow**, from code commit → GitHub Actions → SonarQube → Nexus → DockerHub → EC2 deployment.
+
+All instructions are written to be **production-ready**, **easy to follow**, and **resume-friendly**.
 
 ---
 
-## 📊 CI/CD Architecture Diagram (High-Level)
+# 📌 Overview
+
+This repository contains a **Node.js application** with a fully automated CI pipeline using:
+
+* **GitHub Actions** → CI Orchestration
+* **SonarQube** → Code Quality Scan
+* **Nexus (RAW Repository)** → Artifact Storage
+* **Docker** → Container Build
+* **DockerHub** → Image Registry
+* **EC2 Ubuntu** → Manual Deployment
+
+Deployment is manual using simple Docker commands.
+
+---
+
+# 🧩 High-Level Architecture
 
 ```mermaid
-graph TD
-    Developer[Developer Push] --> GitHub[GitHub Actions CI/CD]
-    GitHub --> SonarQube[SonarQube Analysis]
-    GitHub --> Nexus[Nexus RAW Repository]
-    GitHub --> DockerHub[DockerHub Registry]
-    DockerHub --> EC2[EC2 Manual Deployment]
-    EC2 --> User[Application Access on Port 5006]
-```
-
----
-
-## 🏗️ Detailed Pipeline Flow Diagram
-
 graph LR
-A --> B
-B --> C
-C --> D
-D --> E
-E --> F
-F --> G
-G --> H
-H --> I
-I --> J
-J --> K
-K --> L
-
-
+    A[Developer Push] --> B[GitHub Actions CI]
+    B --> C[SonarQube Scan]
+    B --> D[Nexus RAW Upload]
+    B --> E[Docker Build]
+    E --> F[DockerHub Push]
+    F --> G[EC2 Manual Deployment]
+    G --> H[App Runs on Port 5006]
+```
 
 ---
 
-## 🏗️ Detailed Pipeline Flow Diagram
+# 🏗️ CI Pipeline Flow
 
 ```mermaid
-graph LR;
-    A[Push to Main Branch] --> B[GitHub Actions Triggered];
-    B --> C[Checkout Code];
-    C --> D[Node.js Install & NPM Install];
-    D --> E[SonarQube Scan];
-    E --> F[Create TAR Artifact];
-    F --> G[Nexus Upload (RAW Repository)];
-    G --> H[Docker Build];
-    H --> I[DockerHub Push];
-    I --> J[Manual Deployment on EC2];
-    J --> K[Run Container on Port 5006];
-    K --> L[Application Live];
+graph LR
+    A[Push] --> B[Actions]
+    B --> C[Checkout]
+    C --> D[Install_Node_NPM]
+    D --> E[SonarQube]
+    E --> F[Create_TAR]
+    F --> G[Nexus_RAW_Upload]
+    G --> H[Docker_Build]
+    H --> I[DockerHub_Push]
+    I --> J[Manual_EC2_Deploy]
+    J --> K[Run_on_5006]
+    K --> L[App_Live]
 ```
 
 ---
 
-## 🖼️ Screenshots (To Be Uploaded)
+# 🔐 GitHub Secrets Required
 
-Add the screenshots below when ready:
+Add these in:
+**GitHub → Repo → Settings → Secrets → Actions**
 
-```
-![SonarQube Dashboard](./screenshots/sonarqube.png)
-![Nexus Repository](./screenshots/nexus.png)
-![DockerHub Image](./screenshots/dockerhub.png)
-![EC2 Deployment](./screenshots/ec2-deploy.png)
-```
-
----
-
-## 🏅 Badges (To Be Added)
-
-Example badge placeholders:
-
-```
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Docker Image](https://img.shields.io/badge/docker-published-blue)
-![SonarQube](https://img.shields.io/badge/sonarqube-passed-yellow)
-![Nexus](https://img.shields.io/badge/nexus-uploaded-orange)
-```
-
-Add real badges later once available.
-
---- for Node.js Application
-
-This document provides a **fully detailed, step-by-step README.md** for your Node.js CI/CD pipeline using:
-
-* **GitHub Actions (CI/CD)**
-* **SonarQube (Code Quality Analysis)**
-* **Nexus RAW Repository (Artifact Storage)**
-* **Docker Image Build & Push**
-* **DockerHub Registry**
-* **Manual Deployment on Ubuntu EC2**
-
-This README is suitable for GitHub and professional documentation.
+| Secret Name      | Example          | Description        |
+| ---------------- | ---------------- | ------------------ |
+| `SONAR_HOST_URL` | http://<ip>:9000 | SonarQube URL      |
+| `SONAR_TOKEN`    | token_here       | SonarQube Token    |
+| `NEXUS_HOST`     | http://<ip>:8081 | Nexus Base URL     |
+| `NEXUS_USER`     | admin            | Nexus Username     |
+| `NEXUS_PASS`     | password         | Nexus Password     |
+| `DOCKER_USER`    | username         | DockerHub Username |
+| `DOCKER_PASS`    | token            | DockerHub Token    |
 
 ---
 
-# 📌 Project Overview
-
-This repository contains a **Node.js application** with a complete CI pipeline configured using **GitHub Actions**. The pipeline automatically performs:
-
-### ✔ Code Checkout
-
-### ✔ Node.js installation (v20)
-
-### ✔ Install dependencies
-
-### ✔ SonarQube Code Quality Analysis
-
-### ✔ TAR packaging
-
-### ✔ Upload to Nexus RAW Repository
-
-### ✔ Build Docker Image
-
-### ✔ Push Image to DockerHub
-
-Deployment is performed manually on EC2 using Docker commands.
-
----
-
-# 🏗️ CI Pipeline Architecture
-
-```
-Developer Push → GitHub Actions CI → SonarQube → Nexus RAW Repository → DockerHub
-                                                             ↓
-                                                        Manual EC2 Deploy
-```
-
----
-
-# 🛠️ Prerequisites
-
-Before running the pipeline, ensure you have:
-
-### ✔ SonarQube Server
-
-* Example: `http://<SONAR-IP>:9000`
-* Token stored in GitHub Secrets
-
-### ✔ Nexus Repository Manager (RAW hosted repo)
-
-* Example: `http://<NEXUS-IP>:8081/repository/nodejs/`
-
-### ✔ DockerHub Account
-
-### ✔ EC2 Ubuntu Server (for deployment)
-
-* Docker installed
-
----
-
-# 🔐 Required GitHub Secrets
-
-Add the following secrets under:
-
-```
-GitHub Repo → Settings → Secrets → Actions
-```
-
-| Secret Name      | Description              |
-| ---------------- | ------------------------ |
-| `SONAR_HOST_URL` | URL of SonarQube server  |
-| `SONAR_TOKEN`    | SonarQube token          |
-| `NEXUS_HOST`     | Base URL of Nexus server |
-| `NEXUS_USER`     | Nexus username           |
-| `NEXUS_PASS`     | Nexus password           |
-| `DOCKER_USER`    | DockerHub username       |
-| `DOCKER_PASS`    | DockerHub token          |
-
----
-
-# 🚀 GitHub Actions CI/CD Pipeline (Full YAML)
-
-Below is the complete working YAML file for your CI pipeline.
+# 🚀 GitHub Actions CI Workflow (Full YAML)
 
 ```yaml
-ame: NodeJS CI/CD Pipeline
+name: NodeJS CI/CD Pipeline
 
 on:
   push:
@@ -239,52 +139,46 @@ jobs:
 
 ---
 
-# 📦 Manual Deployment Instructions (Ubuntu EC2)
+# 📦 Manual EC2 Deployment (Ubuntu)
 
-Once GitHub Actions pushes the image to DockerHub, log into your EC2 instance:
+After CI finishes, deploy manually:
 
-### 1. SSH into EC2
+### 1️⃣ Connect to EC2
 
 ```bash
-ssh -i yourkey.pem ubuntu@<your-ec2-ip>
+ssh -i yourkey.pem ubuntu@<ec2-ip>
 ```
 
-### 2. Stop any old container
+### 2️⃣ Stop old container
 
 ```bash
 sudo docker stop nodeapp || true
 sudo docker rm nodeapp || true
 ```
 
-### 3. Pull latest image
+### 3️⃣ Pull latest image
 
 ```bash
-sudo docker pull <your-dockerhub-username>/nodeapp:latest
+sudo docker pull <dockerhub-user>/nodeapp:latest
 ```
 
-### 4. Run container on port 5006
+### 4️⃣ Run container on port **5006**
 
 ```bash
-sudo docker run -d --name nodeapp -p 5006:5006 <your-dockerhub-username>/nodeapp:latest
+sudo docker run -d --name nodeapp -p 5006:5006 <dockerhub-user>/nodeapp:latest
 ```
 
-### 5. Verify
-
-```bash
-sudo docker ps
-```
-
-### App will be available at:
+### 5️⃣ Access app
 
 ```
-http://<ec2-public-ip>:5006/
+http://<ec2-ip>:5006/
 ```
 
 ---
 
-# 🌐 Optional: NGINX Reverse Proxy
+# 🌐 Optional: NGINX Reverse Proxy (Port 80 → 5006)
 
-Create config:
+Create file:
 
 ```
 sudo nano /etc/nginx/sites-available/nodeapp
@@ -299,9 +193,6 @@ server {
 
     location / {
         proxy_pass http://localhost:5006/;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
 ```
@@ -314,24 +205,13 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-Now your app loads via:
+App becomes available at:
 
 ```
 http://<ec2-ip>/
 ```
 
 ---
-
-# 🎯 Conclusion
-
-You now have a **complete, production-ready CI pipeline** that integrates:
-
-* Source control
-* Quality scan (Sonar)
-* Artifact management (Nexus)
-* Containerization (Docker)
-* Registry (DockerHub)
-* EC2-hosted runtime environment
 
 # Screenshots
 <img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/e1130ef8-db05-45b5-8484-fc92ee9c808a" />
@@ -341,5 +221,3 @@ You now have a **complete, production-ready CI pipeline** that integrates:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/108bb3e7-4dc3-42b8-bd5e-6ab1ef8aa3f3" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0f1bf735-72f8-4a38-9e73-1647a3e41da6" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d4995639-2ba3-43cf-a7e2-d28fdbf5d26f" />
-
-
