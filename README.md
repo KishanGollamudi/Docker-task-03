@@ -19,17 +19,18 @@ graph TD
 ## 🏗️ Detailed Pipeline Flow Diagram
 
 graph LR
-A[Push] --> B[Actions]
-B[Actions] --> C[Checkout]
-C[Checkout] --> D[Install_Node_NPM]
-D[Install_Node_NPM] --> E[SonarQube]
-E[SonarQube] --> F[Create_TAR]
-F[Create_TAR] --> G[Nexus_RAW_Upload]
-G[Nexus_RAW_Upload] --> H[Docker_Build]
-H[Docker_Build] --> I[DockerHub_Push]
-I[DockerHub_Push] --> J[Manual_EC2_Deploy]
-J[Manual_EC2_Deploy] --> K[Run_on_5006]
-K[Run_on_5006] --> L[App_Live]
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+F --> G
+G --> H
+H --> I
+I --> J
+J --> K
+K --> L
+
 
 
 ---
