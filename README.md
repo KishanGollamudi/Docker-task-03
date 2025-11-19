@@ -5,13 +5,32 @@
 ## 📊 CI/CD Architecture Diagram (High-Level)
 
 ```mermaid
-graph TD;
-    Developer[Developer Push] --> GitHub[GitHub Actions CI/CD];
-    GitHub --> SonarQube[SonarQube Analysis];
-    GitHub --> Nexus[Nexus RAW Repository];
-    GitHub --> DockerHub[DockerHub Registry];
-    DockerHub --> EC2[EC2 Manual Deployment];
-    EC2 --> User[Application Access on Port 5006];
+graph TD
+    Developer[Developer Push] --> GitHub[GitHub Actions CI/CD]
+    GitHub --> SonarQube[SonarQube Analysis]
+    GitHub --> Nexus[Nexus RAW Repository]
+    GitHub --> DockerHub[DockerHub Registry]
+    DockerHub --> EC2[EC2 Manual Deployment]
+    EC2 --> User[Application Access on Port 5006]
+```
+
+---
+
+## 🏗️ Detailed Pipeline Flow Diagram
+
+```mermaid
+graph LR
+    A[Push to Main Branch] --> B[GitHub Actions Triggered]
+    B --> C[Checkout Code]
+    C --> D[Node.js & Dependencies Installed]
+    D --> E[SonarQube Scan]
+    E --> F[Create TAR Artifact]
+    F --> G[Nexus RAW Upload]
+    G --> H[Docker Build]
+    H --> I[Push to DockerHub]
+    I --> J[Manual Deployment on EC2]
+    J --> K[Run Container on Port 5006]
+    K --> L[Application Live]
 ```
 
 ---
@@ -313,3 +332,9 @@ You now have a **complete, production-ready CI pipeline** that integrates:
 * Containerization (Docker)
 * Registry (DockerHub)
 * EC2-hosted runtime environment
+
+# Screenshots
+<img width="1920" height="1080" alt="1" src="https://github.com/user-attachments/assets/e1130ef8-db05-45b5-8484-fc92ee9c808a" />
+<img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/4bdc9b0e-f970-441e-b7b3-3f603e720616" />
+<img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/1752b0d4-c9be-4dc8-9e71-90c8859f8230" />
+<img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/048afa87-9050-42ce-bb26-84750a980a12" />
