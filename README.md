@@ -17,7 +17,7 @@ graph TD
 ---
 
 ## 🏗️ Detailed Pipeline Flow Diagram
-```mermaid
+
 graph LR
     A[Push] --> B[Actions_Triggered]
     B --> C[Checkout_Code]
@@ -31,7 +31,6 @@ graph LR
     J --> K[Run_on_5006]
     K --> L[App_Live]
 
-```
 ---
 
 ## 🏗️ Detailed Pipeline Flow Diagram
