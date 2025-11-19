@@ -338,3 +338,8 @@ You now have a **complete, production-ready CI pipeline** that integrates:
 <img width="1920" height="1080" alt="2" src="https://github.com/user-attachments/assets/4bdc9b0e-f970-441e-b7b3-3f603e720616" />
 <img width="1920" height="1080" alt="3" src="https://github.com/user-attachments/assets/1752b0d4-c9be-4dc8-9e71-90c8859f8230" />
 <img width="1920" height="1080" alt="4" src="https://github.com/user-attachments/assets/048afa87-9050-42ce-bb26-84750a980a12" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/108bb3e7-4dc3-42b8-bd5e-6ab1ef8aa3f3" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0f1bf735-72f8-4a38-9e73-1647a3e41da6" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d4995639-2ba3-43cf-a7e2-d28fdbf5d26f" />
+
+
