@@ -17,7 +17,7 @@ graph TD
 ---
 
 ## 🏗️ Detailed Pipeline Flow Diagram
-
+```mermaid
 graph LR
     A[Push to Main Branch] --> B[GitHub Actions Triggered]
     B --> C[Checkout Code]
@@ -30,7 +30,7 @@ graph LR
     I --> J[Manual Deployment on EC2]
     J --> K[Run Container on Port 5006]
     K --> L[Application Live on Server]
-
+```
 ---
 
 ## 🏗️ Detailed Pipeline Flow Diagram
