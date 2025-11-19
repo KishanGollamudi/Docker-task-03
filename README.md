@@ -21,16 +21,15 @@ graph TD
 graph LR
     A[Push to Main Branch] --> B[GitHub Actions Triggered]
     B --> C[Checkout Code]
-    C --> D[Node.js Install & NPM Install]
-    D --> E[SonarQube Scan]
+    C --> D[Install Nodejs and Dependencies]
+    D --> E[Run SonarQube Scan]
     E --> F[Create TAR Artifact]
-    F --> G[Nexus Upload RAW Repository]
-    G --> H[Docker Build]
-    H --> I[DockerHub Push]
+    F --> G[Upload to Nexus RAW Repository]
+    G --> H[Build Docker Image]
+    H --> I[Push Image to DockerHub]
     I --> J[Manual Deployment on EC2]
     J --> K[Run Container on Port 5006]
-    K --> L[Application Live]
-
+    K --> L[Application Live on Server]
 
 ---
 
